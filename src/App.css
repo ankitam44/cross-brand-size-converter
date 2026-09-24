@@ -1,118 +1,73 @@
+@import "tailwindcss";
+@import "@fontsource/geist-sans/400.css";
+@import "@fontsource/geist-sans/500.css";
+@import "@fontsource/geist-sans/600.css";
+@import "@fontsource/geist-sans/700.css";
+
+@theme {
+  --font-sans: "Geist Sans", ui-sans-serif, system-ui, sans-serif;
+
+  /* Single accent, used identically everywhere -- blue, not the AI-purple default. */
+  --color-accent-50: #eef2ff;
+  --color-accent-500: #3457ff;
+  --color-accent-600: #2b47e0;
+  --color-accent-700: #2138b8;
+
+  /* Semantic confidence colors -- distinct from the accent, never reused elsewhere. */
+  --color-close-50: #ecfdf3;
+  --color-close-600: #15803d;
+  --color-close-700: #0f5c2c;
+  --color-uncertain-50: #fff7ed;
+  --color-uncertain-600: #b45309;
+  --color-uncertain-700: #8a3d05;
+}
+
 :root {
   color-scheme: light dark;
-  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 }
 
 body {
   margin: 0;
-  background: #f7f5f2;
-  color: #1a1a1a;
+  font-family: var(--font-sans);
+  /* Off-white / off-black, never pure #fff or #000. */
+  background: #faf9f8;
+  color: #17161a;
 }
 
-.app {
-  max-width: 480px;
-  margin: 0 auto;
-  padding: 24px 16px 64px;
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #121114;
+    color: #f2f1f4;
+  }
 }
 
-header {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 24px;
-}
+@layer base {
+  select {
+    width: 100%;
+    appearance: none;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--color-zinc-200);
+    background-color: var(--color-zinc-50);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%2371717a' stroke-width='1.5'%3E%3Cpath d='M5 7.5L10 12.5L15 7.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 1rem;
+    padding: 0.625rem 2.5rem 0.625rem 0.875rem;
+    font-size: 1rem;
+    color: inherit;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
 
-h1 {
-  font-size: 1.4rem;
-  margin: 0;
-}
+  select:focus {
+    outline: none;
+    border-color: var(--color-accent-500);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent-500) 25%, transparent);
+  }
 
-nav {
-  display: flex;
-  gap: 8px;
-}
-
-nav button {
-  flex: 1;
-}
-
-form.lookup,
-.result,
-.coverage {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  font-size: 0.9rem;
-}
-
-select,
-button {
-  font-size: 1rem;
-  padding: 8px 10px;
-  border-radius: 8px;
-  border: 1px solid #d0cdc7;
-}
-
-button {
-  cursor: pointer;
-  background: #1a1a1a;
-  color: white;
-  border: none;
-}
-
-button:disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-
-nav button {
-  background: #ece8e2;
-  color: #1a1a1a;
-}
-
-.result-size {
-  font-size: 1.2rem;
-}
-
-.confidence {
-  display: inline-block;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 999px;
-  width: fit-content;
-}
-
-.confidence-close {
-  background: #dcf3df;
-  color: #216e2f;
-}
-
-.confidence-uncertain {
-  background: #fbe6d4;
-  color: #8a4a10;
-}
-
-.caveat {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.saved-note {
-  font-size: 0.85rem;
-  color: #555;
-}
-
-.coverage ul {
-  margin: 4px 0 0;
-  padding-left: 18px;
+  @media (prefers-color-scheme: dark) {
+    select {
+      border-color: var(--color-zinc-700);
+      background-color: var(--color-zinc-800);
+    }
+  }
 }
