@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BRANDS, convertSize } from "./lib/convert.js";
-import { saveMySize, loadMySize, clearMySize } from "./lib/storage.js";
 import Nav from "./components/Nav.jsx";
 import Lookup from "./components/Lookup.jsx";
 import Result from "./components/Result.jsx";
@@ -13,31 +12,11 @@ export default function App() {
   const [category, setCategory] = useState("tops");
   const [targetBrand, setTargetBrand] = useState(BRANDS[1]);
   const [result, setResult] = useState(null);
-  const [savedSize, setSavedSize] = useState(null);
-
-  useEffect(() => {
-    const saved = loadMySize();
-    if (saved) {
-      setSavedSize(saved);
-      setSourceBrand(saved.brand);
-      setSourceSize(saved.size);
-    }
-  }, []);
 
   function handleConvert(e) {
     e.preventDefault();
     setResult(convertSize(sourceBrand, sourceSize, category, targetBrand));
     setScreen("result");
-  }
-
-  function handleSaveMySize() {
-    saveMySize(sourceBrand, sourceSize);
-    setSavedSize({ brand: sourceBrand, size: sourceSize });
-  }
-
-  function handleClearSaved() {
-    clearMySize();
-    setSavedSize(null);
   }
 
   return (
@@ -60,8 +39,6 @@ export default function App() {
             setCategory={setCategory}
             targetBrand={targetBrand}
             setTargetBrand={setTargetBrand}
-            savedSize={savedSize}
-            onClearSaved={handleClearSaved}
             onSubmit={handleConvert}
           />
         )}
@@ -72,7 +49,6 @@ export default function App() {
             sourceSize={sourceSize}
             targetBrand={targetBrand}
             result={result}
-            onSave={handleSaveMySize}
             onNewLookup={() => setScreen("lookup")}
           />
         )}

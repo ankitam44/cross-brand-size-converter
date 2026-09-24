@@ -1,21 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { Check, CheckCircle, WarningCircle, BookmarkSimple, ArrowCounterClockwise } from "@phosphor-icons/react";
+import { CheckCircle, WarningCircle, ArrowCounterClockwise } from "@phosphor-icons/react";
 
-export default function Result({ sourceBrand, sourceSize, targetBrand, result, onSave, onNewLookup }) {
+export default function Result({ sourceBrand, sourceSize, targetBrand, result, onNewLookup }) {
   const isClose = result.confidence === "close match";
   const Icon = isClose ? CheckCircle : WarningCircle;
-
-  const [justSaved, setJustSaved] = useState(false);
-  const revertTimer = useRef(null);
-
-  useEffect(() => () => clearTimeout(revertTimer.current), []);
-
-  function handleSave() {
-    onSave();
-    setJustSaved(true);
-    clearTimeout(revertTimer.current);
-    revertTimer.current = setTimeout(() => setJustSaved(false), 2000);
-  }
 
   return (
     <div className="flex flex-col gap-6 rounded-2xl bg-white p-6 shadow-sm ring-1 ring-zinc-900/5 sm:p-8 dark:bg-zinc-900 dark:ring-white/10">
@@ -41,36 +28,14 @@ export default function Result({ sourceBrand, sourceSize, targetBrand, result, o
 
       <p className="text-sm leading-relaxed text-zinc-500 dark:text-zinc-400">{result.caveat}</p>
 
-      <div className="flex flex-col gap-2 sm:flex-row">
-        <button
-          type="button"
-          onClick={handleSave}
-          aria-live="polite"
-          className={`flex flex-1 items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-medium text-white transition active:scale-[0.98] ${
-            justSaved ? "bg-close-600 dark:bg-close-600" : "bg-accent-600 hover:bg-accent-700"
-          }`}
-        >
-          {justSaved ? (
-            <>
-              <Check size={16} weight="bold" />
-              Saved
-            </>
-          ) : (
-            <>
-              <BookmarkSimple size={16} weight="bold" />
-              Save {sourceBrand} {sourceSize} as my size
-            </>
-          )}
-        </button>
-        <button
-          type="button"
-          onClick={onNewLookup}
-          className="flex items-center justify-center gap-2 rounded-full border border-zinc-200 px-5 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[0.98] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
-        >
-          <ArrowCounterClockwise size={16} weight="bold" />
-          New lookup
-        </button>
-      </div>
+      <button
+        type="button"
+        onClick={onNewLookup}
+        className="flex items-center justify-center gap-2 rounded-full border border-zinc-200 px-5 py-3 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 active:scale-[0.98] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      >
+        <ArrowCounterClockwise size={16} weight="bold" />
+        New lookup
+      </button>
     </div>
   );
 }
