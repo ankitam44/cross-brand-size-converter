@@ -1,0 +1,118 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #f7f5f2;
+  color: #1a1a1a;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+h1 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+nav {
+  display: flex;
+  gap: 8px;
+}
+
+nav button {
+  flex: 1;
+}
+
+form.lookup,
+.result,
+.coverage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+
+select,
+button {
+  font-size: 1rem;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d0cdc7;
+}
+
+button {
+  cursor: pointer;
+  background: #1a1a1a;
+  color: white;
+  border: none;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+nav button {
+  background: #ece8e2;
+  color: #1a1a1a;
+}
+
+.result-size {
+  font-size: 1.2rem;
+}
+
+.confidence {
+  display: inline-block;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+.confidence-close {
+  background: #dcf3df;
+  color: #216e2f;
+}
+
+.confidence-uncertain {
+  background: #fbe6d4;
+  color: #8a4a10;
+}
+
+.caveat {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.saved-note {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.coverage ul {
+  margin: 4px 0 0;
+  padding-left: 18px;
+}
